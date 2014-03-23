@@ -28,13 +28,12 @@ namespace AspNetCrash.Web.Controllers
 
         public ActionResult memoryleak()
         {
-            for (var x = 0; x <= 100; x++)
+            for (var x = 0; x <= 10000; x++)
             {
                 // serialize a model class, but forget to dispose it.
                 var stream = new MemoryStream();
                 var serialiser = new XmlSerializer(typeof(Product));
                 serialiser.Serialize(stream, new Product());
-                stream.Close();
             }
 
             return Content("Memory Leaked!");
